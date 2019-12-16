@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/registrationFragment">
+
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.example.game.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_registrationFragment_to_gameScreenFragment"
+            app:destination="@id/gameScreenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameOverFragment"
+        android:name="com.example.game.GameOverFragment"
+        android:label="fragment_game_over"
+        tools:layout="@layout/fragment_game_over" >
+        <action
+            android:id="@+id/action_gameOverFragment_to_gameScreenFragment"
+            app:destination="@id/gameScreenFragment" />
+        <argument
+            android:name="num"
+            app:argType="string" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/gameScreenFragment"
+        android:name="com.example.game.GameScreenFragment"
+        android:label="fragment_game_screen"
+        tools:layout="@layout/fragment_game_screen" >
+        <action
+            android:id="@+id/action_gameScreenFragment_to_gameOverFragment"
+            app:destination="@id/gameOverFragment" />
+        <action
+            android:id="@+id/action_gameScreenFragment_to_winScreenFragment"
+            app:destination="@id/winScreenFragment" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/winScreenFragment"
+        android:name="com.example.game.WinScreenFragment"
+        android:label="fragment_win_screen"
+        tools:layout="@layout/fragment_win_screen" >
+        <action
+            android:id="@+id/action_winScreenFragment_to_gameScreenFragment"
+            app:destination="@id/gameScreenFragment" />
+        <argument
+            android:name="numb"
+            app:argType="string" />
+        <argument
+            android:name="winner"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/rulesScreenFragment"
+        android:name="com.example.game.RulesScreenFragment"
+        android:label="RulesScreenFragment" />
+</navigation>
