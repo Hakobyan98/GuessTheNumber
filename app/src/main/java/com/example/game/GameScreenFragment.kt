@@ -1,10 +1,13 @@
 package com.example.game
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.game.databinding.FragmentGameScreenBinding
@@ -22,6 +25,10 @@ class GameScreenFragment : Fragment() {
             R.layout.fragment_game_screen,container,false)
 
 
+        binding.okButton.isEnabled = false
+        binding.numberEdit.doAfterTextChanged {it ->
+            binding.okButton.isEnabled = true
+        }
         binding.okButton.setOnClickListener { okButtonClick(it) }
         return binding.root
     }
@@ -40,4 +47,5 @@ class GameScreenFragment : Fragment() {
                 GameScreenFragmentDirections.actionGameScreenFragmentToGameOverFragment(args.username))
         }
     }
+
 }
