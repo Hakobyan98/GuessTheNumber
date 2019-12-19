@@ -10,8 +10,6 @@
         android:paddingEnd="16dp"
         tools:context=".RegistrationFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-
 
         <EditText
             android:id="@+id/name_edit"

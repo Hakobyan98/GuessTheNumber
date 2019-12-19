@@ -5,29 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.game.databinding.FragmentGameOverBinding
-import kotlinx.android.synthetic.main.fragment_registration.*
 
 class GameOverFragment : Fragment() {
+    lateinit var binding : FragmentGameOverBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = DataBindingUtil.inflate<FragmentGameOverBinding>(inflater,
+        binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_game_over,container,false)
 
         binding.startAgainButton.setOnClickListener { view:View->
-            view.findNavController().navigate(R.id.action_gameOverFragment_to_gameScreenFragment)
+            view.findNavController().navigate(GameOverFragmentDirections
+                .actionGameOverFragmentToGameScreenFragment(GameOverFragmentArgs.fromBundle(arguments!!).user))
         }
 
-        val args = GameOverFragmentArgs.fromBundle(arguments!!)
-        Toast.makeText(context,"Number was ${args.num}",Toast.LENGTH_SHORT).show()
-
+        binding.youLostText.setText("You Lost ${GameOverFragmentArgs.fromBundle(arguments!!).user}")
         return binding.root
     }
-
 }

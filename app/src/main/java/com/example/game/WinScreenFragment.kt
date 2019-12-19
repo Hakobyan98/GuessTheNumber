@@ -1,35 +1,33 @@
 package com.example.game
 
-import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.game.databinding.FragmentWinScreenBinding
-import kotlinx.android.synthetic.main.fragment_registration.*
-import kotlinx.android.synthetic.main.fragment_win_screen.*
 
 class WinScreenFragment : Fragment() {
+    lateinit var binding : FragmentWinScreenBinding
 
-    val args = WinScreenFragmentArgs.fromBundle(arguments!!)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = DataBindingUtil.inflate<FragmentWinScreenBinding>(inflater,
+        binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_win_screen,container,false)
 
-        binding.startAgainButton.setOnClickListener { view:View->
-            view.findNavController().navigate(R.id.action_winScreenFragment_to_gameScreenFragment)
+        binding.startAgainButton.setOnClickListener { view:View ->
+            view.findNavController().navigate(WinScreenFragmentDirections
+                .actionWinScreenFragmentToGameScreenFragment(WinScreenFragmentArgs.fromBundle(arguments!!).winner))
         }
 
-        binding.congratsText.text = args.winner
-        Toast.makeText(context,"number was ${args.numb}",Toast.LENGTH_SHORT).show()
+        binding.winningNumber.setText("Winning number is ${WinScreenFragmentArgs.fromBundle(arguments!!).numb}")
+        binding.congratsText.setText("Congrats!! ${WinScreenFragmentArgs.fromBundle(arguments!!).winner}")
+
         return binding.root
     }
+
 }

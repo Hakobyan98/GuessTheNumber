@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.fragment_registration.*
 import java.util.*
 
 class GameScreenFragment : Fragment() {
-
     lateinit var binding:FragmentGameScreenBinding
 
     override fun onCreateView(
@@ -22,21 +21,23 @@ class GameScreenFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_game_screen,container,false)
 
-        binding.okButton.setOnClickListener { okButtonClick(it)}
+
+        binding.okButton.setOnClickListener { okButtonClick(it) }
         return binding.root
     }
 
     private fun okButtonClick(view:View){
-        val randomInt = Random().nextInt(5) + 1
+        val args = GameScreenFragmentArgs.fromBundle(arguments!!)
+        val randomInt = Random().nextInt(3) + 1
+
         val number = binding.numberEdit.text.toString().toInt()
         if(number == randomInt){
             view.findNavController().navigate(GameScreenFragmentDirections.
-                Action_gameScreenFragment_to_winScreenFragment(randomInt.toString(),
-                GameScreenFragmentArgs.fromBundle(arguments!!).username.toString()))
+            actionGameScreenFragmentToWinScreenFragment(number,args.username))
         }
         else{
-            view.findNavController().navigate(GameScreenFragmentDirections.
-                Action_gameScreenFragment_to_gameOverFragment(randomInt.toString()))
+            view.findNavController().navigate(
+                GameScreenFragmentDirections.actionGameScreenFragmentToGameOverFragment(args.username))
         }
     }
 }
